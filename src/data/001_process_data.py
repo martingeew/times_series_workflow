@@ -52,6 +52,9 @@ merged_df.rename(columns=rename_columns, inplace=True)
 
 merged_df.drop(['month'], axis=1, inplace=True)
 
+# Setting 'Month' as the index
+merged_df.set_index('Month', inplace=True)
+
 
 # --------------------------------------------------------------
 # Export
