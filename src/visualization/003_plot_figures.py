@@ -11,33 +11,30 @@ data = pd.read_pickle("../../data/interim/merged_india_nz_arrivals_data.pkl")
 # Create plots
 # --------------------------------------------------------------
 
-plot = PlotData()
-plot.motor_power(df=data)
-plot.speed_vs_temp(df=data)
-
-
 # Example usage
-# df = pd.read_csv('your_data.csv')
+# data = pd.read_csv('your_data.csv') or data = pd.read_pickle('your_data.pkl')
 # eda = ExploratoryDataAnalysis(df)
 # eda.plot_time_series_individual()
 # eda.plot_dual_axis_time_series('column1', 'column2')
 # ... and so on for other methods
 
+eda = ExploratoryDataAnalysis(data)
+
 # Vizualise the data
-plot_time_series_individual(data)
-plot_dual_axis_time_series(data, 'india_arrivals_esimate', 'India_visa_search')
+eda.plot_time_series_individual()
+eda.plot_dual_axis_time_series('india_arrivals_esimate', 'India_visa_search')
 
 # Check missing values
-check_missing_values(data)
+eda.check_missing_values()
 
 # Check distribution
-plot_histograms(data)
-plot_boxplots(data)
+eda.plot_histograms()
+eda.plot_boxplots()
 
 # Check correlations
-create_pairgrid_plot_all_columns(data)
-plot_all_scatter_combinations(data)  # Plots all combinations
-plot_all_scatter_combinations(data, 'india_arrivals_esimate', 'India_visa_search')  # Plots only col1 vs col3
-find_lead_lag_relationship(data, 'india_arrivals_esimate', 'India_visa_search', max_lag=36)
-plot_dual_axis_time_series(data, 'india_arrivals_esimate', 'India_visa_search', shift_periods=12)
+eda.create_pairgrid_plot_all_columns()
+eda.plot_all_scatter_combinations()  # Plots all combinations as individual plots
+eda.plot_all_scatter_combinations('india_arrivals_esimate', 'India_visa_search')  # Plots only col1 vs col2
+eda.find_lead_lag_relationship('india_arrivals_esimate', 'India_visa_search', max_lag=36)
+eda.plot_dual_axis_time_series('india_arrivals_esimate', 'India_visa_search', shift_periods=12)
 
